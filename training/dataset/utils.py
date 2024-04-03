@@ -13,10 +13,16 @@ def get_dataset(args, mode, **kwargs):
             from .dim3.dataset_acdc import CMRDataset
 
             return CMRDataset(args, mode=mode, k_fold=args.k_fold, k=kwargs['fold_idx'], seed=args.split_seed)
+       
         elif args.dataset == 'lits':
             from .dim3.dataset_lits import LiverDataset
 
             return LiverDataset(args, mode=mode, k_fold=args.k_fold, k=kwargs['fold_idx'], seed=args.split_seed)
+
+        elif args.dataset == 'btcv':
+            from .dim3.dataset_btcv import BCTVDataset
+
+            return BCTVDataset(args, mode=mode, k_fold=args.k_fold, k=kwargs['fold_idx'], seed=args.split_seed)
 
         elif args.dataset == 'bcv':
             from .dim3.dataset_bcv import BCVDataset
@@ -38,10 +44,10 @@ def get_dataset(args, mode, **kwargs):
 
             return AMOSDataset(args, mode=mode, k_fold=args.k_fold, k=kwargs['fold_idx'], seed=args.split_seed)
 
-        elif args.dataset == 'msd_lung':
-            from .dim3.dataset_msd_lung import LungDataset
+        #elif args.dataset == 'msd_lung':
+        #    from .dim3.dataset_msd_lung import LungDataset
 
-            return LungDataset(args, mode=mode, k_fold=args.k_fold, k=kwargs['fold_idx'], seed=args.split_seed)
+        #    return LungDataset(args, mode=mode, k_fold=args.k_fold, k=kwargs['fold_idx'], seed=args.split_seed)
             
 
 

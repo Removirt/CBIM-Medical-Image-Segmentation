@@ -53,7 +53,8 @@ def train_net(net, args, ema_net=None, fold_idx=0):
     ################################################################################
     # Dataset Creation
     trainset = get_dataset(args, mode='train', fold_idx=fold_idx)
-    
+    print(type(trainset) )
+
     trainLoader = data.DataLoader(
         trainset, 
         batch_size=args.batch_size,
@@ -77,7 +78,9 @@ def train_net(net, args, ema_net=None, fold_idx=0):
     if args.resume:
         resume_load_optimizer_checkpoint(optimizer, args)
 
-    criterion = nn.CrossEntropyLoss(weight=torch.tensor(args.weight).cuda().float())
+    # criterion = nn.CrossEntropyLoss(weight=torch.tensor(args.weight).cuda().float()) if args.weight is not None else nn.CrossEntropyLoss()
+    criterion = nn.CrossEntropyLoss()
+
     criterion_dl = DiceLoss()
     
     scaler = torch.cuda.amp.GradScaler() if args.amp else None
@@ -239,14 +242,14 @@ def train_epoch(trainLoader, net, ema_net, optimizer, epoch, writer, criterion, 
 
 def get_parser():
     parser = argparse.ArgumentParser(description='CBIM Medical Image Segmentation')
-    parser.add_argument('--dataset', type=str, default='acdc', help='dataset name')
-    parser.add_argument('--model', type=str, default='unet', help='model name')
-    parser.add_argument('--dimension', type=str, default='2d', help='2d model or 3d model')
+    parser.add_argument('--dataset', type=str, default='btcv', help='dataset name')
+    parser.add_argument('--model', type=str, default='unetr', help='model name')
+    parser.add_argument('--dimension', type=str, default='3d', help='2d model or 3d model')
     parser.add_argument('--pretrain', action='store_true', help='if use pretrained weight for init')
     parser.add_argument('--amp', action='store_true', help='if use the automatic mixed precision for faster training')
     parser.add_argument('--torch_compile', action='store_true', help='use torch.compile, only supported by pytorch2.0')
 
-    parser.add_argument('--batch_size', default=32, type=int, help='batch size')
+    parser.add_argument('--batch_size', default=1, type=int, help='batch size')
     parser.add_argument('--resume', action='store_true', help='if resume training from checkpoint')
     parser.add_argument('--load', type=str, default=False, help='load pretrained model')
     parser.add_argument('--cp_path', type=str, default='./exp/', help='checkpoint path')
