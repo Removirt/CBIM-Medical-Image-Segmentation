@@ -1,5 +1,5 @@
 #DATA
-data_root: /../../Datasets/BTCV2_
+data_root: /../../Datasets/BTCV2D_
 classes: 14
 modality: CT
 

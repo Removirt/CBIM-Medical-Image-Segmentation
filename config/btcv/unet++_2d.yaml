@@ -1,5 +1,5 @@
 #DATA
-data_root: /research/cbim/medical/yg397/ACDC_2d
+data_root: /../../Datasets/BTCV2D_
 classes: 14
 modality: CT
 

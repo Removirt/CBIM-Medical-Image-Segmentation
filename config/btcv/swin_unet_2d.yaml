@@ -1,12 +1,12 @@
 #DATA
-data_root: /../../Datasets/BTCV2_
+data_root: /../../Datasets/BTCV2D_
 classes: 14
 modality: CT
 
 
 #MODEL
 arch: swinunet
-init_model: '/research/cbim/vast/yg397/github/UTNet/initmodel/swin_tiny_patch4_window7_224.pth'
+init_model: '/../model/initmodel/swin_tiny.pth'
 base_chan: 48
 
 #TRAIN
