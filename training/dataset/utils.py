@@ -8,6 +8,12 @@ def get_dataset(args, mode, **kwargs):
 
             return CMRDataset(args, mode=mode, k_fold=args.k_fold, k=kwargs['fold_idx'], seed=args.split_seed)
 
+        elif args.dataset == 'btcv':
+            from .dim2.dataset_btcv import BCTVDataset
+
+            return BCTVDataset(args, mode=mode, k_fold=args.k_fold, k=kwargs['fold_idx'], seed=args.split_seed)
+
+
     else:
         if args.dataset == 'acdc':
             from .dim3.dataset_acdc import CMRDataset
