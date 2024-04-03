@@ -19,8 +19,10 @@ class BCTVDataset(Dataset):
         self.args = args
 
         assert mode in ['train', 'test']
-
-        with open(os.path.join(args.data_root, 'list', 'dataset.yaml'), 'r') as f:
+        args.data_root = './../..' + args.data_root 
+        print(self.load_from_file(args.data_root))
+        
+        with open(os.path.join(self.load_from_file(args.data_root), 'list', 'dataset.yaml'), 'r') as f:
             img_name_list = yaml.load(f, Loader=yaml.SafeLoader)
 
 
@@ -38,7 +40,7 @@ class BCTVDataset(Dataset):
         print(img_name_list)
         print('Start loading %s data'%self.mode)
 
-        path = args.data_root
+        path = self.load_from_file(args.data_root)
 
         self.img_list = []
         self.lab_list = []
@@ -70,6 +72,17 @@ class BCTVDataset(Dataset):
             return len(self.img_list) * 100000
         else:
             return len(self.img_list)
+
+
+    def load_from_file(self, path):
+        """Function to load the data from a file.
+
+        Args:
+            path (str): Path to the file.
+        """
+                
+        path = os.path.normpath(os.path.join(os.path.dirname(__file__), path))  
+        return path
 
     def preprocess(self, itk_img, itk_lab):
         
