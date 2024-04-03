@@ -231,15 +231,16 @@ def get_parser():
     def parse_model_list(string):
         return string.split(',')
     parser = argparse.ArgumentParser(description='CBIM Medical Image Segmentation')
-    parser.add_argument('--dataset', type=str, default='kits', help='dataset name')
-    parser.add_argument('--model', type=str, default='unet', help='model name')
+    parser.add_argument('--dataset', type=str, default='kits', help='dataset name') # Dataset btcv
+    parser.add_argument('--model', type=str, default='unet', help='model name') # Net unetr
     parser.add_argument('--dimension', type=str, default='3d', help='2d model or 3d model')
 
     parser.add_argument('--load', type=parse_model_list, default=False, help='the path of trained model checkpoint. Use \',\' as the separator if load multiple checkpoints for ensemble')
     parser.add_argument('--img_path', type=str, default=False, help='the path of the directory of images to be predicted')
     parser.add_argument('--save_path', type=str, default='./result/', help='the path to save predicted label')
     parser.add_argument('--target_spacing', type=parse_spacing_list, default='1.0,1.0,1.0', help='the spacing that used for training, in x,y,z order for 3d, and x,y order for 2d')
-    
+    ## Spacing (1.5, 1.5, 2.0)
+
     parser.add_argument('--gpu', type=str, default='0')
 
     args = parser.parse_args()
