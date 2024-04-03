@@ -62,9 +62,9 @@ if __name__ == '__main__':
     name_list = os.listdir(src_path + '/imagesTr')
     name_list = [name.split('.')[0] for name in name_list]
 
-    if not os.path.exists(tgt_path+'list'):
-        os.mkdir('%slist'%(tgt_path))
-    with open("%slist/dataset.yaml"%tgt_path, "w",encoding="utf-8") as f:
+    if not os.path.exists(tgt_path+'/list'):
+        os.mkdir('%s/list'%(tgt_path))
+    with open("%s/list/dataset.yaml"%tgt_path, "w",encoding="utf-8") as f:
         yaml.dump(name_list, f)
 
     os.chdir(src_path)
